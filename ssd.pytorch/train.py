@@ -77,9 +77,11 @@ def train():
                   "--dataset_root was not specified.")
             args.dataset_root = COCO_ROOT
         cfg = coco
-        dataset = COCODetection(root=args.dataset_root,
-                                transform=SSDAugmentation(cfg['min_dim'],
-                                                          MEANS))
+        dataset = COCODetection(
+            root=args.dataset_root,
+            annotation_file=os.path.join(args.dataset_root, '_annotations.coco.json'),
+            transform=SSDAugmentation(cfg['min_dim'], MEANS)
+        )
     elif args.dataset == 'VOC':
         if args.dataset_root == COCO_ROOT:
             parser.error('Must specify dataset if specifying dataset_root')
