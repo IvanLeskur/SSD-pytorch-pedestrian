@@ -79,7 +79,7 @@ def train():
         cfg = coco
         dataset = COCODetection(
             root=args.dataset_root,
-            annotation_file=os.path.join(args.dataset_root, '_annotations.coco.json'),
+            image_set='train',
             transform=SSDAugmentation(cfg['min_dim'], MEANS)
         )
     elif args.dataset == 'VOC':
