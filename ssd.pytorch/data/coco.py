@@ -26,11 +26,11 @@ def get_label_map(label_file):
 
 
 class COCOAnnotationTransform(object):
-    """Transforms a COCO annotation into a Tensor of bbox coords and label index
-    Initilized with a dictionary lookup of classnames to indexes
-    """
-    def __init__(self):
-        self.label_map = get_label_map(osp.join(COCO_ROOT, 'coco_labels.txt'))
+
+    def __init__(self, label_file=None):
+        if label_file is None:
+            label_file = os.path.join('data', 'coco_labels.txt')
+        self.label_map = get_label_map(label_file)
 
     def __call__(self, target, width, height):
         """
