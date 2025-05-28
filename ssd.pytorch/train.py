@@ -151,6 +151,13 @@ def train():
                                   num_workers=args.num_workers,
                                   shuffle=True, collate_fn=detection_collate,
                                   pin_memory=True)
+    # Fix for PyTorch 2.x: set generator device to cuda if using cuda
+    generator = None
+    if args.cuda:
+        generator = torch.Generator(device='cuda')
+    else:
+        generator = torch.Generator(device='cpu')
+    data_loader.generator = generator
     # create batch iterator
     batch_iterator = iter(data_loader)
     for iteration in range(args.start_iter, cfg['max_iter']):
