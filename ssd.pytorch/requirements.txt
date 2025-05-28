@@ -94,3 +94,5 @@ torchvision==0.17.2+cu118
 --extra-index-url https://download.pytorch.org/whl/cu118
 opencv-python
 numpy
+pycocotools
+visdom
